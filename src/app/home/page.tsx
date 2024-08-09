@@ -21,7 +21,7 @@ export default function Home() {
         <div className="mt-8 md:mt-10 flex w-full max-w-sm md:max-w-lg mx-auto">
           <input
             type="text"
-            className="w-full p-2 md:p-3 rounded-l-lg text-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 bg-gray-800 text-gray-200"
+            className="w-full p-2 md:p-3 rounded-l-lg text-lg bg-transparent border-2 focus:outline-none focus:ring-2 focus:ring-yellow-500 bg-gray-800 text-gray-200"
             placeholder="Paste your URL here"
           />
           <button className="bg-yellow-300 p-2 md:p-3 rounded-r-lg text-lg font-bold text-black hover:bg-yellow-400">
