@@ -1,4 +1,5 @@
 "use client"
+import { ModeToggle } from '@/components/ThemeToggler';
 import Head from 'next/head';
 import { useState, MouseEvent } from 'react';
 
@@ -6,7 +7,6 @@ const Home: React.FC = () => {
   const [shortUrl, setShortUrl] = useState<string>('');
 
   const handleShorten = () => {
-    // Replace this with actual URL shortening logic
     setShortUrl('https://short.ly/example');
   };
 
@@ -17,33 +17,39 @@ const Home: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-black w-full dark:border dark:border-white/[0.1]">
+    <div className="min-h-screen flex flex-col items-center justify-center bg-slate-50 dark:bg-black w-full dark:border dark:border-white/[0.1]">
+
       <Head>
         <title>Short-ly - URL Shortener</title>
         <meta name="description" content="Shorten your URLs effortlessly with Short-ly" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <div className="absolute top-4 right-4">
+        <ModeToggle />
+      </div>
 
       <main className="flex flex-col items-center justify-center w-full flex-1 px-4 md:px-20 text-center">
-        <h1 className="text-4xl md:text-6xl font-bold text-gray-200 mb-4">
+        <h1 className="text-4xl md:text-6xl font-bold text-slate-950 dark:text-gray-200 mb-4">
           Welcome to <span className="text-yellow-300">Short-ly</span>
         </h1>
 
-        <p className="mt-3 text-lg md:text-2xl text-gray-300">
+        <p className="mt-3 text-lg md:text-2xl text-slate-950 dark:text-gray-300">
           Shorten your URLs effortlessly and share them with the world.
         </p>
 
         <div className="mt-8 md:mt-10 flex flex-col md:flex-row w-full max-w-sm md:max-w-lg mx-auto">
           <input
             type="text"
-            className="w-full p-2 md:p-3 rounded-t-lg md:rounded-l-lg text-lg bg-transparent border-2 focus:outline-none focus:ring-2 focus:ring-yellow-500 bg-gray-800 text-gray-200"
+            className="w-full p-2 md:p-3 rounded-full text-lg bg-transparent border-2 focus:outline-none focus:ring-2 focus:ring-yellow-500 bg-gray-800 text-gray-900 dark:text-gray-200"
             placeholder="Paste your URL here"
           />
+          <button className='bg-gradient-to-r from-red-800 to-fuchsia-800 p-3 md:p-3 rounded-full text-lg font-bold text-black  mt-2 md:mt-0 md:ml-2'>
           <button
             onClick={handleShorten}
-            className="bg-yellow-300 p-2 md:p-3 rounded-b-lg md:rounded-r-lg text-lg font-bold text-black hover:bg-yellow-400 mt-2 md:mt-0 md:ml-2"
-          >
+            className="bg-yellow-300 md:p-3 p-2 w-32 rounded-full text-lg font-bold text-black hover:bg-yellow-400 mt-2 md:mt-0 md:ml-2"
+          > 
             Shorten
+          </button>
           </button>
         </div>
 
@@ -81,7 +87,7 @@ const Home: React.FC = () => {
           target="_blank"
           rel="noopener noreferrer"
         >
-         © 2024 All Rights Reserved
+        Copyright ©️ 2024 Short-ly All rights reserved
         </a>
       </footer>
     </div>
