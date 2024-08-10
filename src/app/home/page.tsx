@@ -1,4 +1,5 @@
 "use client"
+import { GlowingButton } from '@/components/GlowingButton';
 import { ModeToggle } from '@/components/ThemeToggler';
 import Head from 'next/head';
 import { useState, MouseEvent } from 'react';
@@ -43,14 +44,15 @@ const Home: React.FC = () => {
             className="w-full p-2 md:p-3 rounded-full text-lg bg-transparent border-2 focus:outline-none focus:ring-2 focus:ring-yellow-500 bg-gray-800 text-gray-900 dark:text-gray-200"
             placeholder="Paste your URL here"
           />
-          <button className='bg-gradient-to-r from-red-800 to-fuchsia-800 p-3 md:p-3 rounded-full text-lg font-bold text-black  mt-2 md:mt-0 md:ml-2'>
+          {/* <button className='bg-gradient-to-r from-red-800 to-fuchsia-800 p-3 md:p-3 rounded-full text-lg font-bold text-black  mt-2 md:mt-0 md:ml-2'>
           <button
             onClick={handleShorten}
             className="bg-yellow-300 md:p-3 p-2 w-32 rounded-full text-lg font-bold text-black hover:bg-yellow-400 mt-2 md:mt-0 md:ml-2"
           > 
             Shorten
           </button>
-          </button>
+          </button> */}
+          <GlowingButton onClick={handleShorten}><button>Shorten</button></GlowingButton>
         </div>
 
         {shortUrl && (
