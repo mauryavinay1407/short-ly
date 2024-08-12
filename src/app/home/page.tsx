@@ -3,14 +3,18 @@ import { GlowingButton } from '@/components/GlowingButton';
 import { ModeToggle } from '@/components/ThemeToggler';
 import Head from 'next/head';
 import { useState, MouseEvent } from 'react';
-import { useRouter } from 'next/navigation'
+import { useRouter } from 'next/navigation';
 import axios from 'axios';
 import toast from 'react-hot-toast';
+import { Loading } from '@/components/Loading'; 
 
 const Home: React.FC = () => {
   const [shortUrl, setShortUrl] = useState<string>('');
-  const [originalUrl,setOriginalUrl]=useState<string>('');
-  const handleShorten = async() => {
+  const [originalUrl, setOriginalUrl] = useState<string>('');
+  const [loading, setLoading] = useState<boolean>(false); 
+
+  const handleShorten = async () => {
+    setLoading(true); 
     try {
       const response = await axios.post('/api/url', { url: originalUrl });
       if (response.status === 201) {
@@ -24,10 +28,12 @@ const Home: React.FC = () => {
       } else {
         console.error('An unexpected error occurred:', error);
       }
+    } finally {
+      setLoading(false); 
     }
   };
 
-  const router=useRouter();
+  const router = useRouter();
   const copyToClipboard = (event: MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
     navigator.clipboard.writeText(shortUrl);
@@ -37,17 +43,17 @@ const Home: React.FC = () => {
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-slate-50 dark:bg-black w-full dark:border dark:border-white/[0.1] relative">
       <button className="absolute top-4 right-16 bg-slate-700 p-2 px-4 rounded-lg hover:opacity-80 text-white"
-      onClick={()=>router.push('/dashboard')}
+        onClick={() => router.push('/dashboard')}
       >
         Dashboard
       </button>
-      
+
       <Head>
         <title>Short-ly - URL Shortener</title>
         <meta name="description" content="Shorten your URLs effortlessly with Short-ly" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      
+
       <div className="absolute top-4 right-4">
         <ModeToggle />
       </div>
@@ -66,14 +72,20 @@ const Home: React.FC = () => {
             type="text"
             className="w-full p-1 md:p-3 rounded-full text-lg bg-transparent border-2 focus:outline-none focus:ring-2 focus:ring-yellow-500 bg-gray-800 text-gray-900 dark:text-gray-200"
             placeholder="Paste your URL here"
-            onChange={(e)=>setOriginalUrl(e.target.value)}
+            onChange={(e) => setOriginalUrl(e.target.value)}
           />
           <div className='md:w-30 flex justify-center'>
-          <GlowingButton onClick={handleShorten}> Shorten </GlowingButton>
+            <GlowingButton onClick={handleShorten}>Shorten</GlowingButton>
           </div>
         </div>
 
-        {shortUrl && (
+        {loading && (
+          <div className="absolute inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 z-50">
+            <Loading />
+          </div>
+        )}
+
+        {shortUrl && !loading && (
           <div className="mt-8 flex items-center justify-between w-full max-w-sm md:max-w-lg mx-auto bg-gray-900 hover:bg-slate-950 p-4 rounded-lg border border-gray-700">
             <p className="text-gray-200 text-lg truncate">{shortUrl}</p>
             <button
