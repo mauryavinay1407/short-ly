@@ -8,7 +8,7 @@ export const GlowingButton = ({ children, onClick }: any) => {
     >
       <div className="absolute inline-flex group">
         <div
-          className="absolute transition-all rounded-full duration-1000 opacity-70 inset-0 bg-gradient-to-r from-purple-700 via-red-600 to-orange-700 blur-lg group-hover:opacity-100 group-hover:-inset-1 group-hover:duration-200 animate-tilt dark:to-red-500"
+          className="absolute transition-all rounded-full duration-1000 opacity-70 inset-0 bg-gradient-to-r from-purple-700 via-red-600 to-orange-700 blur-lg group-hover:opacity-100 group-hover:-inset-1 group-hover:duration-200 animate-tilt dark:to-red-700"
         ></div>
 
         <div
